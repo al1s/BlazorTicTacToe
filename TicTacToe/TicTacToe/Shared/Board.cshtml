@@ -1,0 +1,9 @@
+﻿@foreach (var cell in Cells)
+{
+    <Cell Color="@cell.Symbol" />
+}
+
+@functions
+{
+    public TicTacToe.Core.Classes.Cell[] Cells { get; set; }
+}
