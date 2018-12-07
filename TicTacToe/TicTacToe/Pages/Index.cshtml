@@ -1,7 +1,37 @@
 ﻿@page "/"
 
-<h1>Hello, world!</h1>
+<div class="board">
+    <Board Cells="@boardViewModel.Cells" />
+</div>
 
-Welcome to your new app.
+@functions {
+TicTacToe.Core.Classes.BoardViewModel boardViewModel;
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+protected override async Task OnInitAsync()
+{
+    boardViewModel = TicTacToe.Core.UI.Instance.CurrentBoard;
+
+    Object thisLock = new Object();
+    TicTacToe.Core.UI.Instance.Manager.Updated
+    += (obj, e) =>
+    {
+        lock (thisLock)
+        {
+            boardViewModel = TicTacToe.Core.UI.Instance.CurrentBoard;
+            this.StateHasChanged();
+        };
+    };
+
+    InitializeBoard();
+    TicTacToe.Core.UI.Instance.Manager.StartGameLoop();
+}
+
+void InitializeBoard()
+{
+    TicTacToe.Core.UI.Instance.Manager.InitializeBoard();
+    boardViewModel = TicTacToe.Core.UI.Instance.CurrentBoard;
+
+    this.StateHasChanged();
+}
+}
+
