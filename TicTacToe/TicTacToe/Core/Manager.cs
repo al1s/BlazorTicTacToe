@@ -9,7 +9,12 @@ namespace TicTacToe.Core
     public class Manager
     {
         public event EventHandler Updated;
+        private Board Board { get; set; }
         public void StartGameLoop() { }
         public void InitializeBoard() { }
+        public Manager(IView view)
+        {
+
+        }
     }
 }
