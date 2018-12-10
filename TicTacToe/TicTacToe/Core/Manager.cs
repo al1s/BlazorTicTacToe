@@ -28,7 +28,7 @@ namespace TicTacToe.Core
         }
         public void InitializeBoard(int boardSize)
         {
-            _board.Dimension = boardSize * boardSize ;
+            _board.Dimension = boardSize;
             _board.Initialize();
             UpdateBoardView();
         }

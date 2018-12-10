@@ -33,10 +33,10 @@ namespace TicTacToe.Core.Classes
         /// </summary>
         public void Initialize()
         {
-            Cells = new Cell[Dimension];
+            Cells = new Cell[Dimension * Dimension];
             // need to explicitly initialize all cells or will get
             // null reference exception on attempt to read any property
-            for(int i = 0; i < Cells.Length; i++)
+            for (int i = 0; i < Cells.Length; i++)
             {
                 Cells[i] = new Cell() { Position = i };
             }
@@ -45,10 +45,37 @@ namespace TicTacToe.Core.Classes
         /// Get any available for a move cell 
         /// </summary>
         /// <returns>A cell</returns>
-        public Cell GetRandomAvailableCell()
+        public Cell GetRandomAvailableCell(List<int> filterIn = null)
         {
             Random rnd = new Random();
+            if(filterIn != null)
+            {
+                var filtered = 
+                    (from move in MovesLeft
+                     join elm in filterIn on move.Key equals elm
+                     select move)
+                   .ToDictionary(kvp => kvp.Key, kvp => kvp.Value); 
+                return filtered.Values.ToArray()[rnd.Next(0, filtered.Count)];
+            }
             return MovesLeft.Values.ToArray()[rnd.Next(0, MovesLeft.Count)];
+        }
+        /// <summary>
+        /// Get best first (second if not computer starts) move
+        /// </summary>
+        /// <returns></returns>
+        public Cell GetBestDebutMove()
+        {
+            // Best initial positions include center cells or tips of
+            // diagonals
+            List<int> bestPositions = new List<int>
+            {
+                0,
+                Dimension - 1,
+                Cells.Length - Dimension,
+                Cells.Length - 1,
+                Dimension % 2 != 0 ? (Cells.Length - 1) / 2 : -1
+            };
+            return GetRandomAvailableCell(bestPositions);
         }
     }
 }
