@@ -1,0 +1,13 @@
+﻿<form action="/" id="frmSymbolChoice">
+    <input class="form__input" type="radio" name="symbolChoice" id="radioBtnX" value="X" checked>
+    <label onclick=@(() => handleChangeSymbol("X")) class="menu__element" id="labelX" for="radioBtnX">X</label>
+    <input class="form__input" type="radio" name="symbolChoice" id="radioBtn0" value="0">
+    <label onclick=@(() => handleChangeSymbol("0")) class="menu__element" id="label0" for="radioBtn0">0</label>
+</form>
+
+@functions{ 
+    public void handleChangeSymbol(string symbol)
+    {
+        TicTacToe.Core.UI.Instance.Manager.SetSymbol(symbol);
+    }
+}
