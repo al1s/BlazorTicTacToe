@@ -48,4 +48,14 @@ who did not work on the code. Pull Requests may be merged by the reviewer.
 team that a Pull Request has been merged.  Also, before every feature branch is checked out,
 we will pull master to ensure we are working with the most up to date code.
 
+## WEB APP DATABASE SCHEMA
+
+
+
 ## SAMPLE VIEWS OF WEB APP   
+
+#### Landing Page
+
+#### Scores History Page
+
+#### About Us Page
