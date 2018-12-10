@@ -5,6 +5,7 @@
     <RunCommand>dotnet</RunCommand>
     <RunArguments>blazor serve</RunArguments>
     <LangVersion>7.3</LangVersion>
+    <UserSecretsId>1fac638c-3b14-44f4-a524-abf0fa5b2821</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
