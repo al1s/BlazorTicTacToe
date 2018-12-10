@@ -15,11 +15,6 @@ namespace TicTacToe.Core
         {
             _manager = manager;
         }
-        public int[] AvailableMoves(Board board)
-        {
-            throw new NotImplementedException();
-        }
-
         public Task ChooseMove(Board board)
         {
             throw new NotImplementedException();

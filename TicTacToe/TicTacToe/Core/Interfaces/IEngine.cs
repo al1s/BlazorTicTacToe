@@ -10,7 +10,6 @@ namespace TicTacToe.Core.Interfaces
     {
         int MiniMax(Board board, Player player, int move);
         Tuple<int, int> Utility(Board board, int move, Player player);
-        int[] AvailableMoves(Board board);
         Task ChooseMove(Board board);
     }
 }
