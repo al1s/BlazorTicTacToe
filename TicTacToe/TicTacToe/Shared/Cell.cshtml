@@ -1,6 +1,7 @@
-﻿<span class="symbol symbol-@(Symbol)"></span>
+﻿<span class="board__cell">@(View)</span>
 
 @functions
 {
-    public string Symbol { get; set; }
+    [Parameter]
+    string View { get; set; }
 }

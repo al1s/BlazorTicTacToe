@@ -3,17 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TicTacToe.Core.Classes;
+using TicTacToe.Core.Interfaces;
 
 namespace TicTacToe.Core
 {
-    public class UI
+    public class UI : IView
     {
-        private static BoardViewModel _currentBoard { get; set; }
-        private static UI _ui { get; set; }
-        private static Manager _manager { get; set; }
+        private static Board _currentBoard { get; set; }
+        private static UI _ui = null;
+        private static Manager _manager = null;
         private UI()
         {
-            _currentBoard = new BoardViewModel();
+            _currentBoard = new Board();
+            _currentBoard.Cells = new Cell[] { };
+            _manager = new Manager(this);
         }
         public static UI Instance
         {
@@ -26,7 +29,7 @@ namespace TicTacToe.Core
             }
 
         }
-        public BoardViewModel CurrentBoard
+        public Board CurrentBoard
         {
             get {
                 return _currentBoard;
@@ -38,6 +41,16 @@ namespace TicTacToe.Core
             {
                 return _manager;
             }
+        }
+
+        public void DrawBoard(Board board)
+        {
+            _currentBoard = board;
+        }
+
+        public void ToggleTurnIndicator(Player player)
+        {
+            throw new NotImplementedException();
         }
     }
 }

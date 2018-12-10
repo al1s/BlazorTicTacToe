@@ -5,9 +5,8 @@ using System.Threading.Tasks;
 
 namespace TicTacToe.Core.Classes
 {
-    public class Cell
+    public class Board
     {
-        public int Position { get; set; }
-        public string Symbol { get; set; }
+        public Cell[] Cells { get; set; }
     }
 }

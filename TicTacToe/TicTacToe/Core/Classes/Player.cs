@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace TicTacToe.Core
+namespace TicTacToe.Core.Classes
 {
-    public class Class
+    public class Player
     {
     }
 }
