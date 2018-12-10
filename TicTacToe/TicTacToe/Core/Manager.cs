@@ -46,10 +46,18 @@ namespace TicTacToe.Core
         {
             throw new NotImplementedException();
         }
-        public void HandleClick(int Position)
+        public void HandleClick(int position)
         {
-            _board.Cells[Position].View = _minPlayer;
-            Updated?.Invoke(this, new EventArgs());
+            if(_board.Cells[position].Symbol == string.Empty)
+            {
+                _board.Cells[position].Symbol = _minPlayer;
+                Updated?.Invoke(this, new EventArgs());
+            }
+        }
+        public void SetSymbol(string symbol)
+        {
+            _minPlayer = symbol;
+            _maxPlayer = symbol == "0" ? "X" : "0";
         }
     }
 }

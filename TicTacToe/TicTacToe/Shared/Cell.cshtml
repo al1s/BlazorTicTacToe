@@ -1,7 +1,9 @@
-﻿<button onclick=@(() => HandleClick(Position)) class="board__cell">@(View)</button>
+﻿<span onclick=@(() => HandleClick(Position)) class="board__cell">@(Symbol)</span>
 
 @functions
 {
+    [Parameter]
+    string Symbol { get; set; }
     [Parameter]
     string View { get; set; }
     [Parameter]
