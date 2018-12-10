@@ -1,7 +1,14 @@
-﻿<span class="board__cell">@(View)</span>
+﻿<button onclick=@(() => HandleClick(Position)) class="board__cell">@(View)</button>
 
 @functions
 {
     [Parameter]
     string View { get; set; }
+    [Parameter]
+    int Position { get; set; }
+
+    public void HandleClick(int position)
+    {
+        TicTacToe.Core.UI.Instance.Manager.HandleClick(position);
+    }
 }

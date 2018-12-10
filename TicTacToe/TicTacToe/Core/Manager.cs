@@ -13,6 +13,8 @@ namespace TicTacToe.Core
         private IView _view;
         private Engine _engine;
         private Board _board;
+        private string _minPlayer = "X";
+        private string _maxPlayer = "0";
         public void StartGameLoop() { }
 
         public Manager(IView view)
@@ -28,9 +30,11 @@ namespace TicTacToe.Core
         public void InitializeBoard(int boardSize)
         {
             _board.Cells = new Cell[boardSize * boardSize];
+            // need to explicitly initialize all cells or will get
+            // null reference exception on attempt to read any property
             for(int i = 0; i < _board.Cells.Length; i++)
             {
-                _board.Cells[i] = new Cell();
+                _board.Cells[i] = new Cell() { Position = i };
             }
             UpdateBoardView();
         }
@@ -41,6 +45,11 @@ namespace TicTacToe.Core
         public void MoveAndGetUtil()
         {
             throw new NotImplementedException();
+        }
+        public void HandleClick(int Position)
+        {
+            _board.Cells[Position].View = _minPlayer;
+            Updated?.Invoke(this, new EventArgs());
         }
     }
 }
