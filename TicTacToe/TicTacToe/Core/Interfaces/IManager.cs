@@ -8,6 +8,6 @@ namespace TicTacToe.Core.Interfaces
     public interface IManager
     {
         void MoveAndGetUtil();
-        void InitializeBoard();
+        void InitializeBoard(int boardSize);
     }
 }

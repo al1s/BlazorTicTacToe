@@ -1,37 +1,38 @@
 ﻿@page "/"
 
 <div class="board">
-    <Board Cells="@boardViewModel.Cells" />
+    <Board Cells="@board.Cells" />
 </div>
 
 @functions {
-TicTacToe.Core.Classes.BoardViewModel boardViewModel;
+    TicTacToe.Core.Classes.Board board;
+    int boardSize = 3;
 
-protected override async Task OnInitAsync()
-{
-    boardViewModel = TicTacToe.Core.UI.Instance.CurrentBoard;
-
-    Object thisLock = new Object();
-    TicTacToe.Core.UI.Instance.Manager.Updated
-    += (obj, e) =>
+    protected override void OnInit()
     {
-        lock (thisLock)
+        board = TicTacToe.Core.UI.Instance.CurrentBoard;
+
+        Object thisLock = new Object();
+        TicTacToe.Core.UI.Instance.Manager.Updated
+        += (obj, e) =>
         {
-            boardViewModel = TicTacToe.Core.UI.Instance.CurrentBoard;
-            this.StateHasChanged();
+            lock (thisLock)
+            {
+                board = TicTacToe.Core.UI.Instance.CurrentBoard;
+                this.StateHasChanged();
+            };
         };
-    };
 
-    InitializeBoard();
-    TicTacToe.Core.UI.Instance.Manager.StartGameLoop();
-}
+        InitializeBoard();
+        TicTacToe.Core.UI.Instance.Manager.StartGameLoop();
+    }
 
-void InitializeBoard()
-{
-    TicTacToe.Core.UI.Instance.Manager.InitializeBoard();
-    boardViewModel = TicTacToe.Core.UI.Instance.CurrentBoard;
+    void InitializeBoard()
+    {
+        TicTacToe.Core.UI.Instance.Manager.InitializeBoard(boardSize);
+        board = TicTacToe.Core.UI.Instance.CurrentBoard;
 
-    this.StateHasChanged();
-}
+        this.StateHasChanged();
+    }
 }
 

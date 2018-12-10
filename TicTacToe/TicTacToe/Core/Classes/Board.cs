@@ -7,5 +7,6 @@ namespace TicTacToe.Core.Classes
 {
     public class Board
     {
+        public Cell[] Cells { get; set; }
     }
 }
