@@ -14,6 +14,7 @@ namespace TicTacToe.Core.Classes
         /// All cells of the board
         /// </summary>
         public Cell[] Cells { get; set; }
+
         /// <summary>
         /// All available cells to make move
         /// </summary>
@@ -24,10 +25,12 @@ namespace TicTacToe.Core.Classes
                 return Cells.Where(cell => cell.Symbol == string.Empty).ToDictionary(cell => cell.Position, cell => cell);
             }
         }
+
         /// <summary>
-        /// Dimention of the board (currently hard set to 3 * 3)
+        /// Define dimension of the board
         /// </summary>
         public int Dimension { get; set; }
+
         /// <summary>
         /// Populate a board with cells 
         /// </summary>
@@ -41,6 +44,7 @@ namespace TicTacToe.Core.Classes
                 Cells[i] = new Cell() { Position = i };
             }
         }
+
         /// <summary>
         /// Get any available for a move cell 
         /// </summary>
