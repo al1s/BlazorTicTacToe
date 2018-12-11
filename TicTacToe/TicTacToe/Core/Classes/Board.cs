@@ -89,8 +89,8 @@ namespace TicTacToe.Core.Classes
         public Board Clone()
         {
             Board newBoard = new Board();
-            newBoard.Cells = new Cell[] { };
             newBoard.Dimension = Dimension;
+            newBoard.Initialize();
             for (int i = 0; i < Cells.Length; i++)
             {
                 newBoard.Cells[i].Position = Cells[i].Position;
