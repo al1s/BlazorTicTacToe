@@ -44,7 +44,7 @@ namespace TicTacToe.Core
         /// <summary>
         /// Return terminal conditions and utility for the next move for the player:
         /// 1 - if the player win
-        /// -1 - if the player loose
+        /// -1 - if the player lose
         /// 0 - no winning, no terminal conditions
         /// </summary>
         /// <param name="board">Board position to start with</param>
@@ -104,7 +104,7 @@ namespace TicTacToe.Core
                     .All(elm => elm == secondColumnFirstElm);
             if (secondColumnClosed) return GetResult(secondColumnFirstElm, player);
 
-            char thirdColumnFirstElm = boardAsArray[1]; 
+            char thirdColumnFirstElm = boardAsArray[2]; 
             bool thirdColumnClosed = thirdColumnFirstElm != default(char) &&
                 boardAsArray
                     .Where((x, ndx) => (ndx + 1) % 3 == 0)

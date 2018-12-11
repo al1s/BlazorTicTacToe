@@ -2,11 +2,32 @@ using System;
 using Xunit;
 using TicTacToe.Core.Classes;
 using System.Linq;
+using TicTacToe.Core;
 
 namespace TicTacToeTests
 {
-    public class BoardTests
+    public class BoardTests : IDisposable
     {
+        Manager manager;
+        Engine engine;
+        Board board;
+        public BoardTests()
+        {
+            manager = new Manager(null);
+            engine = new Engine(manager);
+            board = new Board();
+            int expectedCells = 9;
+            board.Dimension = expectedCells / 3;
+            board.Initialize();
+        }
+
+        public void Dispose()
+        {
+            manager = null;
+            board = null;
+            engine = null;
+        }
+
         /// <summary>
         /// Can initialize the board
         /// </summary>
@@ -54,7 +75,7 @@ namespace TicTacToeTests
             board.Initialize();
             board.Cells[cellToSetValue].Symbol = symbol;
             //assert
-            Assert.Equal(symbol, board.Cells[cellToSetValue].Symbol );
+            Assert.Equal(symbol, board.Cells[cellToSetValue].Symbol);
         }
         /// <summary>
         /// Can get available moves for filled board
@@ -71,7 +92,7 @@ namespace TicTacToeTests
             board.Dimension = expectedCells / 2;
             // act
             board.Initialize();
-            for(int i = 0; i < filledCells; i++)
+            for (int i = 0; i < filledCells; i++)
             {
                 board.Cells[i].Symbol = symbol;
             }
@@ -94,7 +115,7 @@ namespace TicTacToeTests
             board.Dimension = expectedCells / 2;
             // act
             board.Initialize();
-            for(int i = 0; i < filledCells; i++)
+            for (int i = 0; i < filledCells; i++)
             {
                 board.Cells[i].Symbol = symbol;
             }
@@ -190,6 +211,241 @@ namespace TicTacToeTests
             var bestDebut = board.GetBestDebutMove();
             // assert
             Assert.Contains(bestDebut.Position, allBestMoves);
+        }
+        /// <summary>
+        /// Can win top row
+        /// </summary>
+        [Fact]
+        public void CanWinOnTopRow()
+        {
+            BoardTests BST = new BoardTests();
+            board.Cells[0].Symbol = 'X';
+            board.Cells[1].Symbol = 'X';
+            Tuple<bool, int> result = engine.Utility(board, 2, 'X');
+
+            Assert.Equal(1, result.Item2);
+        }
+        /// <summary>
+        /// Can win middle row
+        /// </summary>
+        [Fact]
+        public void CanWinMiddleRow()
+        {
+            BoardTests BST = new BoardTests();
+            board.Cells[3].Symbol = 'X';
+            board.Cells[4].Symbol = 'X';
+            Tuple<bool, int> result = engine.Utility(board, 5, 'X');
+
+            Assert.Equal(1, result.Item2);
+        }
+        /// <summary>
+        /// Can win bottom row
+        /// </summary>
+        [Fact]
+        public void CanWinBottomRow()
+        {
+            BoardTests BST = new BoardTests();
+            board.Cells[6].Symbol = 'X';
+            board.Cells[7].Symbol = 'X';
+            Tuple<bool, int> result = engine.Utility(board, 8, 'X');
+
+            Assert.Equal(1, result.Item2);
+        }
+        /// <summary>
+        /// Can win left column
+        /// </summary>
+        [Fact]
+        public void CanWinLeftCol()
+        {
+            BoardTests BST = new BoardTests();
+            board.Cells[0].Symbol = 'X';
+            board.Cells[3].Symbol = 'X';
+            Tuple<bool, int> result = engine.Utility(board, 6, 'X');
+
+            Assert.Equal(1, result.Item2);
+        }
+        /// <summary>
+        /// Can win middle column
+        /// </summary>
+        [Fact]
+        public void CanWinMiddleCol()
+        {
+            BoardTests BST = new BoardTests();
+            board.Cells[1].Symbol = 'X';
+            board.Cells[4].Symbol = 'X';
+            Tuple<bool, int> result = engine.Utility(board, 7, 'X');
+
+            Assert.Equal(1, result.Item2);
+        }
+        /// <summary>
+        /// Can win right column
+        /// </summary>
+        [Fact]
+        public void CanWinRightCol()
+        {
+            BoardTests BST = new BoardTests();
+            board.Cells[2].Symbol = 'X';
+            board.Cells[5].Symbol = 'X';
+            Tuple<bool, int> result = engine.Utility(board, 8, 'X');
+
+            Assert.Equal(1, result.Item2);
+        }
+        /// <summary>
+        /// Can win diagonal
+        /// </summary>
+        [Fact]
+        public void CanWinDiag()
+        {
+            BoardTests BST = new BoardTests();
+            board.Cells[0].Symbol = 'X';
+            board.Cells[4].Symbol = 'X';
+            Tuple<bool, int> result = engine.Utility(board, 8, 'X');
+
+            Assert.Equal(1, result.Item2);
+        }
+        /// <summary>
+        /// Can win anti-diagonal
+        /// </summary>
+        [Fact]
+        public void CanWinAntiDiag()
+        {
+            BoardTests BST = new BoardTests();
+            board.Cells[2].Symbol = 'X';
+            board.Cells[4].Symbol = 'X';
+            Tuple<bool, int> result = engine.Utility(board, 6, 'X');
+
+            Assert.Equal(1, result.Item2);
+        }        
+        /// <summary>
+        /// Can lose top row
+        /// </summary>
+        [Fact]
+        public void CanLoseTopRow()
+        {
+            BoardTests BST = new BoardTests();
+            board.Cells[0].Symbol = '0';
+            board.Cells[1].Symbol = '0';
+            board.Cells[2].Symbol = '0';
+            Tuple<bool, int> result = engine.Utility(board, 3, 'X');
+
+            Assert.Equal(-1, result.Item2);
+        }
+        /// <summary>
+        /// Can lose middle row
+        /// </summary>
+        [Fact]
+        public void CanLoseMiddleRow()
+        {
+            BoardTests BST = new BoardTests();
+            board.Cells[3].Symbol = '0';
+            board.Cells[4].Symbol = '0';
+            board.Cells[5].Symbol = '0';
+            Tuple<bool, int> result = engine.Utility(board, 6, 'X');
+
+            Assert.Equal(-1, result.Item2);
+        }
+        /// <summary>
+        /// Can lose bottom row
+        /// </summary>
+        [Fact]
+        public void CanLoseBottomRow()
+        {
+            BoardTests BST = new BoardTests();
+            board.Cells[6].Symbol = '0';
+            board.Cells[7].Symbol = '0';
+            board.Cells[8].Symbol = '0';
+            Tuple<bool, int> result = engine.Utility(board, 0, 'X');
+
+            Assert.Equal(-1, result.Item2);
+        }
+        /// <summary>
+        /// Can lose left column
+        /// </summary>
+        [Fact]
+        public void CanLoseLeftCol()
+        {
+            BoardTests BST = new BoardTests();
+            board.Cells[0].Symbol = '0';
+            board.Cells[3].Symbol = '0';
+            board.Cells[6].Symbol = '0';
+            Tuple<bool, int> result = engine.Utility(board, 7, 'X');
+
+            Assert.Equal(-1, result.Item2);
+        }
+        /// <summary>
+        /// Can lose middle column
+        /// </summary>
+        [Fact]
+        public void CanLoseMiddleCol()
+        {
+            BoardTests BST = new BoardTests();
+            board.Cells[1].Symbol = '0';
+            board.Cells[4].Symbol = '0';
+            board.Cells[7].Symbol = '0';
+            Tuple<bool, int> result = engine.Utility(board, 8, 'X');
+
+            Assert.Equal(-1, result.Item2);
+        }
+        /// <summary>
+        /// Can lose right column
+        /// </summary>
+        [Fact]
+        public void CanLoseRightCol()
+        {
+            BoardTests BST = new BoardTests();
+            board.Cells[2].Symbol = '0';
+            board.Cells[5].Symbol = '0';
+            board.Cells[8].Symbol = '0';
+            Tuple<bool, int> result = engine.Utility(board, 0, 'X');
+
+            Assert.Equal(-1, result.Item2);
+        }
+        /// <summary>
+        /// Can lose diagonal
+        /// </summary>
+        [Fact]
+        public void CanLoseDiag()
+        {
+            BoardTests BST = new BoardTests();
+            board.Cells[0].Symbol = '0';
+            board.Cells[4].Symbol = '0';
+            board.Cells[8].Symbol = '0';
+            Tuple<bool, int> result = engine.Utility(board, 1, 'X');
+
+            Assert.Equal(-1, result.Item2);
+        }
+        /// <summary>
+        /// Can lose anti-diagonal
+        /// </summary>
+        [Fact]
+        public void CanLoseAntiDiag()
+        {
+            BoardTests BST = new BoardTests();
+            board.Cells[2].Symbol = '0';
+            board.Cells[4].Symbol = '0';
+            board.Cells[6].Symbol = '0';
+            Tuple<bool, int> result = engine.Utility(board, 7, 'X');
+
+            Assert.Equal(-1, result.Item2);
+        }
+        /// <summary>
+        /// Can tie game
+        /// </summary>
+        [Fact]
+        public void CanTieGame()
+        {
+            BoardTests BST = new BoardTests();
+            board.Cells[0].Symbol = 'X';
+            board.Cells[1].Symbol = '0';
+            board.Cells[2].Symbol = 'X';
+            board.Cells[3].Symbol = '0';
+            board.Cells[4].Symbol = '0';
+            board.Cells[5].Symbol = 'X';
+            board.Cells[6].Symbol = 'X';
+            board.Cells[7].Symbol = 'X';
+            Tuple<bool, int> result = engine.Utility(board, 8, '0');
+
+            Assert.Equal(0, result.Item2);
         }
     }
 }
