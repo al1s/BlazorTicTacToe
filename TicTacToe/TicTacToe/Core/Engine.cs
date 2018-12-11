@@ -20,9 +20,25 @@ namespace TicTacToe.Core
             throw new NotImplementedException();
         }
 
-        public int MiniMax(Board board, Player player, int move)
+        public int MiniMax(Board board, int move, char player)
         {
-            throw new NotImplementedException();
+            // return utility and stop recurrsion
+            var (terminal, utility) = Utility(board, move, player);
+            if (terminal)
+                return utility;
+            // Make a move to calculate utility for the next step
+            Board newBoard = board.Clone();
+            newBoard.Cells[move].Symbol = player;
+            player = player == 'X' ? '0' : 'X';
+            if(player == _manager.GetMaxPlayer)
+            {
+                return newBoard.MovesLeft.Select(cell => MiniMax(newBoard, cell.Key, _manager.GetMaxPlayer)).Max();
+            }
+            if(player == _manager.GetMinPlayer)
+            {
+                return newBoard.MovesLeft.Select(cell => MiniMax(newBoard, cell.Key, _manager.GetMinPlayer)).Min();
+            }
+            throw new Exception("Player is not defined");
         }
 
         /// <summary>
