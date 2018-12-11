@@ -1,5 +1,8 @@
 ﻿@page "/"
 
+<div class="menu">
+    <SymbolMenu />
+</div>
 <div class="board">
     <Board Cells="@board.Cells" />
 </div>
@@ -35,4 +38,3 @@
         this.StateHasChanged();
     }
 }
-

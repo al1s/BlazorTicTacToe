@@ -312,3 +312,11 @@ p {
     margin: 0;
     padding: 0;
 }
+
+.aboutUs {
+    margin-bottom: 50px;
+}
+
+.aboutUs div {
+    margin-bottom: 20px;
+}
