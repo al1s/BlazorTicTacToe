@@ -9,5 +9,7 @@ namespace TicTacToe.Core.Interfaces
     {
         void MoveAndGetUtil();
         void InitializeBoard(int boardSize);
+        char GetMinPlayer { get; }
+        char GetMaxPlayer { get; }
     }
 }

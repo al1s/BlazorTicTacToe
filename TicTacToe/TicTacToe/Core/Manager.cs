@@ -19,12 +19,12 @@ namespace TicTacToe.Core
         /// And she's a minimizing player - 
         /// she wants to minimize loss in worst case by her move
         /// </summary>
-        private string _minPlayer = "X";
+        private char _minPlayer = 'X';
 
         /// <summary>
         /// AI by default. Opposite of the user.
         /// </summary>
-        private string _maxPlayer = "0";
+        private char _maxPlayer = '0';
 
         /// <summary>
         /// Handles communication between Engine and UI layers
@@ -39,6 +39,21 @@ namespace TicTacToe.Core
                 Updated?.Invoke(this, e);
             };
             _board = new Board();
+        }
+
+        public char GetMaxPlayer
+        {
+            get
+            {
+                return _maxPlayer;
+            }
+        }
+        public char GetMinPlayer
+        {
+            get
+            {
+                return _minPlayer;
+            }
         }
 
         /// <summary>
@@ -70,7 +85,7 @@ namespace TicTacToe.Core
         /// <param name="position">Cell position being clicked</param>
         public void HandleClick(int position)
         {
-            if (_board.Cells[position].Symbol == string.Empty)
+            if (_board.Cells[position].Symbol == default(char))
                 MakeMove(position, _minPlayer);
         }
 
@@ -79,7 +94,7 @@ namespace TicTacToe.Core
         /// </summary>
         /// <param name="position">Cell's position</param>
         /// <param name="symbol">Symbol to set for a cell</param>
-        public void MakeMove(int position, string symbol)
+        public void MakeMove(int position, char symbol)
         {
             _board.Cells[position].Symbol = symbol;
             // to customize design pass changes to UI layer and handle element design
@@ -91,10 +106,10 @@ namespace TicTacToe.Core
         /// Handle attempt of changing of symbols assigned to parties
         /// </summary>
         /// <param name="symbol">Symbol to assign to user player</param>
-        public void SetSymbol(string symbol)
+        public void SetSymbol(char symbol)
         {
             _minPlayer = symbol;
-            _maxPlayer = symbol == "0" ? "X" : "0";
+            _maxPlayer = symbol == '0' ? 'X' : '0';
         }
     }
 }
