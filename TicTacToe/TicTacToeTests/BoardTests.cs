@@ -48,7 +48,7 @@ namespace TicTacToeTests
             Board board = new Board();
             int expectedCells = 4;
             int cellToSetValue = 0;
-            string symbol = "X";
+            char symbol = 'X';
             board.Dimension = expectedCells / 2;
             // act
             board.Initialize();
@@ -67,7 +67,7 @@ namespace TicTacToeTests
             int expectedCells = 4;
             int filledCells = 3;
             int resultAvailCells = expectedCells - filledCells;
-            string symbol = "X";
+            char symbol = 'X';
             board.Dimension = expectedCells / 2;
             // act
             board.Initialize();
@@ -90,7 +90,7 @@ namespace TicTacToeTests
             int expectedCells = 4;
             int filledCells = 3;
             int resultAvailCells = expectedCells - filledCells;
-            string symbol = "X";
+            char symbol = 'X';
             board.Dimension = expectedCells / 2;
             // act
             board.Initialize();
@@ -113,7 +113,7 @@ namespace TicTacToeTests
             Board board = new Board();
             int expectedCells = 4;
             int filledCells = 2;
-            string symbol = "X";
+            char symbol = 'X';
             board.Dimension = expectedCells / 2;
             // act
             board.Initialize();
@@ -137,7 +137,7 @@ namespace TicTacToeTests
             Board board = new Board();
             int expectedCells = 9;
             int filledCells = 8;
-            string symbol = "X";
+            char symbol = 'X';
             board.Dimension = expectedCells / 3;
             // act
             board.Initialize();
@@ -161,7 +161,7 @@ namespace TicTacToeTests
             Board board = new Board();
             int expectedCells = 9;
             int filledCells = 5;
-            string symbol = "X";
+            char symbol = 'X';
             board.Dimension = expectedCells / 3;
             // act
             board.Initialize();
