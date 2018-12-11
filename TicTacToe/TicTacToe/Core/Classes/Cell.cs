@@ -8,7 +8,7 @@ namespace TicTacToe.Core.Classes
     public class Cell
     {
         public int Position { get; set; }
-        public string Symbol { get; set; } = string.Empty;
+        public char Symbol { get; set; } = default;
         public string View { get; set; } = string.Empty;
     }
 }

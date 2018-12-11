@@ -22,7 +22,7 @@ namespace TicTacToe.Core.Classes
         {
             get
             {
-                return Cells.Where(cell => cell.Symbol == string.Empty).ToDictionary(cell => cell.Position, cell => cell);
+                return Cells.Where(cell => cell.Symbol == default(char)).ToDictionary(cell => cell.Position, cell => cell);
             }
         }
 
@@ -80,6 +80,41 @@ namespace TicTacToe.Core.Classes
                 Dimension % 2 != 0 ? (Cells.Length - 1) / 2 : -1
             };
             return GetRandomAvailableCell(bestPositions);
+        }
+
+        /// <summary>
+        /// Clone current board
+        /// </summary>
+        /// <returns>Return new board object with all properties equal to original board</returns>
+        public Board Clone()
+        {
+            Board newBoard = new Board();
+            newBoard.Cells = new Cell[] { };
+            newBoard.Dimension = Dimension;
+            for (int i = 0; i < Cells.Length; i++)
+            {
+                newBoard.Cells[i].Position = Cells[i].Position;
+                newBoard.Cells[i].Symbol = Cells[i].Symbol;
+            }
+            return newBoard;
+        }
+
+        /// <summary>
+        /// Return array of symbols in cells
+        /// </summary>
+        /// <returns>Array of symbols</returns>
+        public char[] ToArray()
+        {
+            return Cells.Select(cell => cell.Symbol).ToArray();
+        }
+
+        /// <summary>
+        /// Return a string representation of all symbols in cells
+        /// </summary>
+        /// <returns>A string with all symbols</returns>
+        public override string ToString()
+        {
+            return string.Join("", ToArray());
         }
     }
 }

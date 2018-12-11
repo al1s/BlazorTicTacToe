@@ -9,7 +9,7 @@ namespace TicTacToe.Core.Interfaces
     public interface IEngine
     {
         int MiniMax(Board board, Player player, int move);
-        Tuple<int, int> Utility(Board board, int move, Player player);
+        Tuple<bool, int> Utility(Board board, int move, char player);
         Task ChooseMove(Board board);
     }
 }
