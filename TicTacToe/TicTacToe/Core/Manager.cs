@@ -13,9 +13,23 @@ namespace TicTacToe.Core
         private IView _view;
         private Engine _engine;
         private Board _board;
+
+        /// <summary>
+        /// By default the user gets X as symbol
+        /// And she's a minimizing player - 
+        /// she wants to minimize loss in worst case by her move
+        /// </summary>
         private string _minPlayer = "X";
+
+        /// <summary>
+        /// AI by default. Opposite of the user.
+        /// </summary>
         private string _maxPlayer = "0";
 
+        /// <summary>
+        /// Handles communication between Engine and UI layers
+        /// </summary>
+        /// <param name="view">UI component</param>
         public Manager(IView view)
         {
             _view = view;
@@ -26,13 +40,22 @@ namespace TicTacToe.Core
             };
             _board = new Board();
         }
+
+        /// <summary>
+        /// Manage board initialization
+        /// </summary>
+        /// <param name="boardSize">Dimension of the board</param>
         public void InitializeBoard(int boardSize)
         {
             _board.Dimension = boardSize;
             _board.Initialize();
             UpdateBoardView();
         }
-        public void UpdateBoardView()
+
+        /// <summary>
+        /// Sync veiwBoard with an actual board
+        /// </summary>
+        public void UpdateBoardView() 
         {
             _view.DrawBoard(_board);
         }
@@ -40,14 +63,34 @@ namespace TicTacToe.Core
         {
             throw new NotImplementedException();
         }
+
+        /// <summary>
+        /// Handle click event initiated by a user
+        /// </summary>
+        /// <param name="position">Cell position being clicked</param>
         public void HandleClick(int position)
         {
-            if(_board.Cells[position].Symbol == string.Empty)
-            {
-                _board.Cells[position].Symbol = _minPlayer;
-                Updated?.Invoke(this, new EventArgs());
-            }
+            if (_board.Cells[position].Symbol == string.Empty)
+                MakeMove(position, _minPlayer);
         }
+
+        /// <summary>
+        /// Invoke page renderer on changes
+        /// </summary>
+        /// <param name="position">Cell's position</param>
+        /// <param name="symbol">Symbol to set for a cell</param>
+        public void MakeMove(int position, string symbol)
+        {
+            _board.Cells[position].Symbol = symbol;
+            // to customize design pass changes to UI layer and handle element design
+            // there.
+            Updated?.Invoke(this, new EventArgs());
+        }
+
+        /// <summary>
+        /// Handle attempt of changing of symbols assigned to parties
+        /// </summary>
+        /// <param name="symbol">Symbol to assign to user player</param>
         public void SetSymbol(string symbol)
         {
             _minPlayer = symbol;
