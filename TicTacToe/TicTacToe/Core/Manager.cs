@@ -111,5 +111,36 @@ namespace TicTacToe.Core
             _minPlayer = symbol;
             _maxPlayer = symbol == '0' ? 'X' : '0';
         }
+
+        public int ChooseMove(Board board)
+        {
+            // if we just started and AI needs to make first move
+            // we use shortcut route
+            if (board.MovesLeft.Values.Count >= board.Dimension - 1)
+                return board.GetBestDebutMove().Position;
+            else
+            // we are in the middle of the game
+            {
+                int topUtility = int.MinValue;
+                Random rnd = new Random();
+                // we  are going to use minimax to get appraisal 
+                // of all possible next moves.
+                // Compute intensive! Should be async.
+                var availableMoves = board
+                    .MovesLeft
+                    .Keys
+                    .Select(position =>
+                    {
+                        var utility = _engine.MiniMax(board, position, _maxPlayer);
+                        if (topUtility < utility)
+                            topUtility = utility;
+                        return new Tuple<int, int>(position, utility);
+                    })
+                    .Where(elm => elm.Item2 == topUtility);
+                int randomAvailableMove = rnd.Next(0, availableMoves.Count()); 
+                return availableMoves.ToArray()[randomAvailableMove].Item1;
+
+            }
+        }
     }
 }
