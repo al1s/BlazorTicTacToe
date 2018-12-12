@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace TTTGame.Shared.Models
+namespace TTTGame.Shared
 {
     class GameStats
     {

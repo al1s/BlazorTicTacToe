@@ -1,8 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace TTTGame.Server.DataAccess
 {
@@ -11,5 +7,7 @@ namespace TTTGame.Server.DataAccess
         public GameStatsContext(DbContextOptions<GameStatsContext> options) : base(options)
         {
         }
+
+        
     }
 }
