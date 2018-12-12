@@ -86,7 +86,14 @@ namespace TicTacToe.Core
         public void HandleClick(int position)
         {
             if (_board.Cells[position].Symbol == default(char))
+            {
                 MakeMove(position, _minPlayer);
+                var (terminal, utility) = _engine.Utility(_board, position, _minPlayer);
+                if (terminal)
+                    HandleTerminalConditions(utility);
+                else
+                    ComputerMove();
+            }
         }
 
         /// <summary>
