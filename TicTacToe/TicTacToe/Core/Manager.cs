@@ -165,5 +165,17 @@ namespace TicTacToe.Core
                 _board.Initialize();
             });
         }
+
+        /// <summary>
+        /// Make next move and handle game over
+        /// </summary>
+        public void ComputerMove()
+        {
+            int nextMove = ChooseMove(_board);
+            _board.Cells[nextMove].Symbol = _maxPlayer;
+            var (terminal, utility) = _engine.Utility(_board, nextMove, _maxPlayer);
+            if (terminal)
+                HandleTerminalConditions(utility);
+        }
     }
 }
