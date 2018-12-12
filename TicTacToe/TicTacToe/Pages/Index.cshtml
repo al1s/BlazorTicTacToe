@@ -6,35 +6,46 @@
 <div class="board">
     <Board Cells="@board.Cells" />
 </div>
+@if(ShowMessage)
+{ 
+    <div class="modal">@message</div>
+}
 
 @functions {
-    TicTacToe.Core.Classes.Board board;
-    int boardSize = 3;
-    string symbol = "X"; 
+TicTacToe.Core.Classes.Board board;
+string message;
+bool ShowMessage;
+int boardSize = 3;
+string symbol = "X";
 
-    protected override void OnInit()
+protected override void OnInit()
+{
+    board = TicTacToe.Core.UI.Instance.CurrentBoard;
+    message = TicTacToe.Core.UI.Instance.Message;
+    ShowMessage = TicTacToe.Core.UI.Instance.ShowMessage;
+
+    Object thisLock = new Object();
+    TicTacToe.Core.UI.Instance.Manager.Updated
+    += (obj, e) =>
     {
-        board = TicTacToe.Core.UI.Instance.CurrentBoard;
-
-        Object thisLock = new Object();
-        TicTacToe.Core.UI.Instance.Manager.Updated
-        += (obj, e) =>
+        lock (thisLock)
         {
-            lock (thisLock)
-            {
-                board = TicTacToe.Core.UI.Instance.CurrentBoard;
-                this.StateHasChanged();
-            };
+            board = TicTacToe.Core.UI.Instance.CurrentBoard;
+            message = TicTacToe.Core.UI.Instance.Message;
+            ShowMessage = TicTacToe.Core.UI.Instance.ShowMessage;
+
+            this.StateHasChanged();
         };
+    };
 
-        InitializeBoard();
-    }
+    InitializeBoard();
+}
 
-    void InitializeBoard()
-    {
-        TicTacToe.Core.UI.Instance.Manager.InitializeBoard(boardSize);
-        board = TicTacToe.Core.UI.Instance.CurrentBoard;
+void InitializeBoard()
+{
+    TicTacToe.Core.UI.Instance.Manager.InitializeBoard(boardSize);
+    board = TicTacToe.Core.UI.Instance.CurrentBoard;
 
-        this.StateHasChanged();
-    }
+    this.StateHasChanged();
+}
 }

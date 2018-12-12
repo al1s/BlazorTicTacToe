@@ -112,6 +112,11 @@ namespace TicTacToe.Core
             _maxPlayer = symbol == '0' ? 'X' : '0';
         }
 
+        /// <summary>
+        /// Choose next move from best available with shortcut for first/second
+        /// </summary>
+        /// <param name="board">A board to choose next move to</param>
+        /// <returns>Position for the next move</returns>
         public int ChooseMove(Board board)
         {
             // if we just started and AI needs to make first move
@@ -141,6 +146,19 @@ namespace TicTacToe.Core
                 return availableMoves.ToArray()[randomAvailableMove].Item1;
 
             }
+        }
+
+        public void HandleTerminalConditions(int condition)
+        {
+            if (condition == -1) _view.ShowMsg("You win!");
+            else if (condition == 1) _view.ShowMsg("Computer wins!");
+            else if (condition == 0) _view.ShowMsg("Draw!");
+            Updated?.Invoke(this, new EventArgs());
+            Task delay = Task.Run(() =>
+            {
+                Task.Delay(3000);
+                _board.Initialize();
+            });
         }
     }
 }
