@@ -8,7 +8,7 @@
 </div>
 @if(ShowMessage)
 { 
-    <div class="modal">@message</div>
+    <div class="modal__component">@message</div>
 }
 
 @functions {
@@ -45,6 +45,8 @@ void InitializeBoard()
 {
     TicTacToe.Core.UI.Instance.Manager.InitializeBoard(boardSize);
     board = TicTacToe.Core.UI.Instance.CurrentBoard;
+    message = TicTacToe.Core.UI.Instance.Message;
+    ShowMessage = TicTacToe.Core.UI.Instance.ShowMessage;
 
     this.StateHasChanged();
 }

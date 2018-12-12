@@ -76,11 +76,5 @@ namespace TicTacToe.Core
         {
             _showMessage = false;
         }
-
-
-        public void ToggleTurnIndicator(Player player)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

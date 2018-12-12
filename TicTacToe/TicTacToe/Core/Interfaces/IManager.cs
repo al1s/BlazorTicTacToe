@@ -7,7 +7,6 @@ namespace TicTacToe.Core.Interfaces
 {
     public interface IManager
     {
-        void MoveAndGetUtil();
         void InitializeBoard(int boardSize);
         char GetMinPlayer { get; }
         char GetMaxPlayer { get; }

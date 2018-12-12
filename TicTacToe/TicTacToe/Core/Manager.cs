@@ -74,10 +74,6 @@ namespace TicTacToe.Core
         {
             _view.DrawBoard(_board);
         }
-        public void MoveAndGetUtil()
-        {
-            throw new NotImplementedException();
-        }
 
         /// <summary>
         /// Handle click event initiated by a user
@@ -128,7 +124,7 @@ namespace TicTacToe.Core
         {
             // if we just started and AI needs to make first move
             // we use shortcut route
-            if (board.MovesLeft.Values.Count >= board.Dimension - 1)
+            if (board.MovesLeft.Values.Count >= board.Dimension * board.Dimension- 1)
                 return board.GetBestDebutMove().Position;
             else
             // we are in the middle of the game
@@ -138,6 +134,11 @@ namespace TicTacToe.Core
                 // we  are going to use minimax to get appraisal 
                 // of all possible next moves.
                 // Compute intensive! Should be async.
+                Console.WriteLine($"moves left: {board.MovesLeft.Count()}");
+                foreach (var cell in board.MovesLeft)
+                {
+                    Console.WriteLine($"available cells are (pos): {cell.Key}");
+                }
                 var availableMoves = board
                     .MovesLeft
                     .Keys
@@ -147,23 +148,29 @@ namespace TicTacToe.Core
                         if (topUtility < utility)
                             topUtility = utility;
                         return new Tuple<int, int>(position, utility);
-                    })
-                    .Where(elm => elm.Item2 == topUtility);
-                int randomAvailableMove = rnd.Next(0, availableMoves.Count()); 
-                return availableMoves.ToArray()[randomAvailableMove].Item1;
+                    }).ToArray();
+                var movesWithTopUtility = availableMoves.Where(elm => elm.Item2 == topUtility).ToArray();
+                Console.WriteLine($"available moves cnt: {movesWithTopUtility.Count()}");
+                foreach (var move in movesWithTopUtility)
+                {
+                    Console.WriteLine($"available moves are (pos, util): {move.Item1}, {move.Item2}");
+                }
+                int randomAvailableMove = rnd.Next(0, movesWithTopUtility.Count()); 
+                return movesWithTopUtility[randomAvailableMove].Item1;
 
             }
         }
 
-        public void HandleTerminalConditions(int condition)
+        public async void HandleTerminalConditions(int condition)
         {
             if (condition == -1) _view.ShowMsg("You win!");
             else if (condition == 1) _view.ShowMsg("Computer wins!");
             else if (condition == 0) _view.ShowMsg("Draw!");
             Updated?.Invoke(this, new EventArgs());
+            Console.WriteLine("The message presenter invoked");
             Task delay = Task.Run(() =>
             {
-                Task.Delay(3000);
+                Task.Delay(3);
                 _board.Initialize();
             });
         }
