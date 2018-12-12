@@ -62,70 +62,61 @@ namespace TicTacToe.Core
             // clone current board to calculate utility for next move
             Board newBoard = board.Clone();
             newBoard.Cells[move].Symbol = player;
-            // hard code winning conditions - it's faster then loop through cells
+            
+            // hard code winning conditions - it's faster than looping through cells
             char[] boardAsArray = newBoard.ToArray();
 
             // All rows for 3x3 board
-            char firstRowFirstElm = boardAsArray[0]; 
-            bool firstRowClosed = firstRowFirstElm != default(char) &&
-                boardAsArray
-                    .Take(3)
-                    .All(elm => elm == firstRowFirstElm);
-            if (firstRowClosed) return GetResult(firstRowFirstElm, player); 
-            
-            char secondRowFirstElm = boardAsArray[3]; 
-            bool secondRowClosed = secondRowFirstElm != default(char) &&
-                boardAsArray
-                    .Skip(3)
-                    .Take(3)
-                    .All(elm => elm == secondRowFirstElm);
-            if (secondRowClosed) return GetResult(secondRowFirstElm, player); 
+            bool firstRowClosed = boardAsArray[0] != default(char) &&
+                boardAsArray[0] == boardAsArray[1] &&
+                boardAsArray[1] == boardAsArray[2];
+           
+            if (firstRowClosed) return GetResult(boardAsArray[0], player);
 
-            char thirdRowFirstElm = boardAsArray[6]; 
-            bool thirdRowClosed = thirdRowFirstElm != default(char) &&
-                boardAsArray
-                    .Skip(6)
-                    .Take(3)
-                    .All(elm => elm == thirdRowFirstElm);
-            if (thirdRowClosed) return GetResult(thirdRowFirstElm, player); 
+            bool secondRowClosed = boardAsArray[3] != default(char) &&
+                boardAsArray[3] == boardAsArray[4] &&
+                boardAsArray[4] == boardAsArray[5];
+          
+            if (secondRowClosed) return GetResult(boardAsArray[3], player);
+
+            bool thirdRowClosed = boardAsArray[6] != default(char) &&
+                boardAsArray[6] == boardAsArray[7] &&
+                boardAsArray[7] == boardAsArray[8];
+
+            if (thirdRowClosed) return GetResult(boardAsArray[6], player);
 
             // All columns for 3x3 board
-            char firstColumnFirstElm = boardAsArray[0]; 
-            bool firstColumnClosed = firstColumnFirstElm != default(char) &&
-                boardAsArray
-                    .Where((x, ndx) => ndx % 3 == 0)
-                    .All(elm => elm == firstColumnFirstElm);
-            if (firstColumnClosed) return GetResult(firstColumnFirstElm, player); 
+            bool firstColumnClosed = boardAsArray[0] != default(char) &&
+                boardAsArray[0] == boardAsArray[3] &&
+                boardAsArray[3] == boardAsArray[6];
+                    
+            if (firstColumnClosed) return GetResult(boardAsArray[0], player);
 
-            char secondColumnFirstElm = boardAsArray[1]; 
-            bool secondColumnClosed = secondColumnFirstElm != default(char) &&
-                boardAsArray
-                    .Where((x, ndx) => (ndx + 2) % 3 == 0)
-                    .All(elm => elm == secondColumnFirstElm);
-            if (secondColumnClosed) return GetResult(secondColumnFirstElm, player);
+            bool secondColumnClosed = boardAsArray[1] != default(char) &&
+                boardAsArray[1] == boardAsArray[4] &&
+                boardAsArray[4] == boardAsArray[7];
+                    
+            if (secondColumnClosed) return GetResult(boardAsArray[1], player);
 
-            char thirdColumnFirstElm = boardAsArray[2]; 
-            bool thirdColumnClosed = thirdColumnFirstElm != default(char) &&
-                boardAsArray
-                    .Where((x, ndx) => (ndx + 1) % 3 == 0)
-                    .All(elm => elm == thirdColumnFirstElm);
-            if (thirdColumnClosed) return GetResult(thirdColumnFirstElm, player);
+            bool thirdColumnClosed = boardAsArray[2] != default(char) &&
+                boardAsArray[2] == boardAsArray[5] &&
+                boardAsArray[5] == boardAsArray[8];
+                    
+            if (thirdColumnClosed) return GetResult(boardAsArray[2], player);
 
             // Diagonal for 3x3 board
-            char diagFirstElm = boardAsArray[0]; 
-            bool diagClosed = diagFirstElm != default(char) &&
-                boardAsArray
-                    .Where((x, ndx) => ndx % 4 == 0)
-                    .All(elm => elm == diagFirstElm );
-            if (diagClosed) return GetResult(diagFirstElm, player); 
+            bool diagClosed = boardAsArray[0] != default(char) &&
+                boardAsArray[0] == boardAsArray[4] &&
+                boardAsArray[4] == boardAsArray[8];
+                   
+            if (diagClosed) return GetResult(boardAsArray[0], player);
 
             // Anti Diagonal for 3x3 board
-            char antiDiagFirstElm = boardAsArray[2]; 
-            bool antiDiagClosed = antiDiagFirstElm != default(char) &&
-                boardAsArray
-                    .Where((x, ndx) => ndx % 2 == 0 && ndx != 0 && ndx != 8)
-                    .All(elm => elm == antiDiagFirstElm );
-            if (antiDiagClosed) return GetResult(antiDiagFirstElm, player);
+            bool antiDiagClosed = boardAsArray[2] != default(char) &&
+                boardAsArray[2] == boardAsArray[4] &&
+                boardAsArray[4] == boardAsArray[6];
+                  
+            if (antiDiagClosed) return GetResult(boardAsArray[2], player);
 
             if (newBoard.MovesLeft.Count == 0)
                 return new Tuple<bool, int>(true, 0);
