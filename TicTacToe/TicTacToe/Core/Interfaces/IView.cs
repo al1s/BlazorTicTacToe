@@ -9,7 +9,6 @@ namespace TicTacToe.Core.Interfaces
     public interface IView
     {
         void DrawBoard(Board board);
-        void ToggleTurnIndicator(Player player);
         void ShowMsg(string message);
         void HideMsg();
     }
