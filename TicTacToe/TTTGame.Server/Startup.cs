@@ -29,6 +29,12 @@ namespace TTTGame.Server
 
             services.AddMvc();
 
+            services.AddDbContext<GameStatsContext>(options =>
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+            }
+ );
+
             services.AddResponseCompression(options =>
             {
                 options.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(new[]
