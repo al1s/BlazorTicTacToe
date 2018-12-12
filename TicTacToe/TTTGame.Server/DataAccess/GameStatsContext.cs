@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TTTGame.Server.Models;
 
 namespace TTTGame.Server.DataAccess
 {
@@ -11,5 +12,7 @@ namespace TTTGame.Server.DataAccess
         public GameStatsContext(DbContextOptions<GameStatsContext> options) : base(options)
         {
         }
+
+        public DbSet<GameStats> GameStats { set; get; }
     }
 }

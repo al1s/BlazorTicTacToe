@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace TTTGame.Shared.Models
+namespace TTTGame.Server.Models
 {
-    class GameStats
+    public class GameStats
     {
         public int ID { get; set; }
 
@@ -18,8 +18,8 @@ namespace TTTGame.Shared.Models
         [Display(Name = "Ties")]
         public int Ties { get; set; }
 
-        [Display(Name = "AVG Game Time")]
+        [Display(Name = "Game Time Completion")]
         [DataType(DataType.Time)]
-        public TimeSpan AvgerageGameTime { get; set; }
+        public TimeSpan GameTime { get; set; }
     }
 }

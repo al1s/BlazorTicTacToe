@@ -11,8 +11,4 @@
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\TTTGame.Shared\TTTGame.Shared.csproj" />
-  </ItemGroup>
-
 </Project>

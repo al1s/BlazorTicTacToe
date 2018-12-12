@@ -8,6 +8,8 @@ using System.Net.Mime;
 using Microsoft.Extensions.Configuration;
 using TTTGame.Server.DataAccess;
 using Microsoft.EntityFrameworkCore;
+using TTTGame.Server.Models.Services;
+using TTTGame.Server.Models.Interfaces;
 
 namespace TTTGame.Server
 {
@@ -32,8 +34,9 @@ namespace TTTGame.Server
             services.AddDbContext<GameStatsContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
-            }
- );
+            });
+
+            services.AddTransient<IGameStats, GameStatService>();
 
             services.AddResponseCompression(options =>
             {
@@ -57,9 +60,7 @@ namespace TTTGame.Server
             }
 
             app.UseStaticFiles();
-
             app.UseMvc();
-
         }
     }
 }

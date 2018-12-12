@@ -7,9 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicTacToe", "TicTacToe\TicT
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicTacToeTests", "TicTacToeTests\TicTacToeTests.csproj", "{84F38517-112B-4EAB-B5F7-397FA0202CB5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TTTGame.Server", "TTTGame.Server\TTTGame.Server.csproj", "{34C2648F-7213-47FB-929F-664394838404}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TTTGame.Shared", "TTTGame.Shared\TTTGame.Shared.csproj", "{6848159E-CF67-42D0-ADAF-BE19CAE11F7D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TTTGame.Server", "TTTGame.Server\TTTGame.Server.csproj", "{34C2648F-7213-47FB-929F-664394838404}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +27,6 @@ Global
 		{34C2648F-7213-47FB-929F-664394838404}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{34C2648F-7213-47FB-929F-664394838404}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{34C2648F-7213-47FB-929F-664394838404}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6848159E-CF67-42D0-ADAF-BE19CAE11F7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6848159E-CF67-42D0-ADAF-BE19CAE11F7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6848159E-CF67-42D0-ADAF-BE19CAE11F7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6848159E-CF67-42D0-ADAF-BE19CAE11F7D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
