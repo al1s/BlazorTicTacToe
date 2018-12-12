@@ -5,7 +5,7 @@ using System.Text;
 
 namespace TTTGame.Shared
 {
-    class GameStats
+    public class GameStats
     {
         public int ID { get; set; }
 

@@ -8,6 +8,7 @@ using System.Net.Mime;
 using Microsoft.Extensions.Configuration;
 using TTTGame.Server.DataAccess;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Serialization;
 
 namespace TTTGame.Server
 {
@@ -27,13 +28,16 @@ namespace TTTGame.Server
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddMvc();
+            services.AddMvc().AddJsonOptions(options =>
+            {
+                options.SerializerSettings.ContractResolver = new DefaultContractResolver();
+            });
 
             services.AddDbContext<GameStatsContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             }
- );
+            );
 
             services.AddResponseCompression(options =>
             {
