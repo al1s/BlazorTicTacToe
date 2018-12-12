@@ -10,5 +10,6 @@ namespace TicTacToe.Core.Interfaces
     {
         void DrawBoard(Board board);
         void ToggleTurnIndicator(Player player);
+        void ShowMsg(string message);
     }
 }
