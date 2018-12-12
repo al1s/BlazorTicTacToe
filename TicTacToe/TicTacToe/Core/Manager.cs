@@ -148,6 +148,10 @@ namespace TicTacToe.Core
             }
         }
 
+        /// <summary>
+        /// Handle different conditions for game over state
+        /// </summary>
+        /// <param name="condition">Win, lose, tie</param>
         public void HandleTerminalConditions(int condition)
         {
             if (condition == -1) _view.ShowMsg("You win!");
@@ -157,6 +161,7 @@ namespace TicTacToe.Core
             Task delay = Task.Run(() =>
             {
                 Task.Delay(3000);
+                _view.HideMsg();
                 _board.Initialize();
             });
         }
