@@ -227,7 +227,7 @@ namespace TicTacToeTests
             // act
             Tuple<bool, int> result = engine.Utility(board, 2, 'X');
             // assert
-            Assert.Equal(1, result.Item2);
+            Assert.Equal(-1, result.Item2);
         }
         /// <summary>
         /// Can win middle row
@@ -242,7 +242,7 @@ namespace TicTacToeTests
             // act
             Tuple<bool, int> result = engine.Utility(board, 5, 'X');
             // assert
-            Assert.Equal(1, result.Item2);
+            Assert.Equal(-1, result.Item2);
         }
         /// <summary>
         /// Can win bottom row
@@ -257,7 +257,7 @@ namespace TicTacToeTests
             // act
             Tuple<bool, int> result = engine.Utility(board, 8, 'X');
             // assert
-            Assert.Equal(1, result.Item2);
+            Assert.Equal(-1, result.Item2);
         }
         /// <summary>
         /// Can win left column
@@ -272,7 +272,7 @@ namespace TicTacToeTests
             // act
             Tuple<bool, int> result = engine.Utility(board, 6, 'X');
             // assert
-            Assert.Equal(1, result.Item2);
+            Assert.Equal(-1, result.Item2);
         }
         /// <summary>
         /// Can win middle column
@@ -287,7 +287,7 @@ namespace TicTacToeTests
             // act
             Tuple<bool, int> result = engine.Utility(board, 7, 'X');
             // assert
-            Assert.Equal(1, result.Item2);
+            Assert.Equal(-1, result.Item2);
         }
         /// <summary>
         /// Can win right column
@@ -302,7 +302,7 @@ namespace TicTacToeTests
             // act
             Tuple<bool, int> result = engine.Utility(board, 8, 'X');
             // assert
-            Assert.Equal(1, result.Item2);
+            Assert.Equal(-1, result.Item2);
         }
         /// <summary>
         /// Can win diagonal
@@ -317,7 +317,7 @@ namespace TicTacToeTests
             // act
             Tuple<bool, int> result = engine.Utility(board, 8, 'X');
             // assert
-            Assert.Equal(1, result.Item2);
+            Assert.Equal(-1, result.Item2);
         }
         /// <summary>
         /// Can win anti-diagonal
@@ -332,7 +332,7 @@ namespace TicTacToeTests
             // act
             Tuple<bool, int> result = engine.Utility(board, 6, 'X');
             // assert
-            Assert.Equal(1, result.Item2);
+            Assert.Equal(-1, result.Item2);
         }        
         /// <summary>
         /// Can lose top row
@@ -348,7 +348,7 @@ namespace TicTacToeTests
             // act
             Tuple<bool, int> result = engine.Utility(board, 3, 'X');
             // assert
-            Assert.Equal(-1, result.Item2);
+            Assert.Equal(1, result.Item2);
         }
         /// <summary>
         /// Can lose middle row
@@ -364,7 +364,7 @@ namespace TicTacToeTests
             // act
             Tuple<bool, int> result = engine.Utility(board, 6, 'X');
             // assert
-            Assert.Equal(-1, result.Item2);
+            Assert.Equal(1, result.Item2);
         }
         /// <summary>
         /// Can lose bottom row
@@ -380,7 +380,7 @@ namespace TicTacToeTests
             // act
             Tuple<bool, int> result = engine.Utility(board, 0, 'X');
             // assert
-            Assert.Equal(-1, result.Item2);
+            Assert.Equal(1, result.Item2);
         }
         /// <summary>
         /// Can lose left column
@@ -396,7 +396,7 @@ namespace TicTacToeTests
             // act
             Tuple<bool, int> result = engine.Utility(board, 7, 'X');
             // assert
-            Assert.Equal(-1, result.Item2);
+            Assert.Equal(1, result.Item2);
         }
         /// <summary>
         /// Can lose middle column
@@ -412,7 +412,7 @@ namespace TicTacToeTests
             // act
             Tuple<bool, int> result = engine.Utility(board, 8, 'X');
             // assert
-            Assert.Equal(-1, result.Item2);
+            Assert.Equal(1, result.Item2);
         }
         /// <summary>
         /// Can lose right column
@@ -428,7 +428,7 @@ namespace TicTacToeTests
             // act
             Tuple<bool, int> result = engine.Utility(board, 0, 'X');
             // assert
-            Assert.Equal(-1, result.Item2);
+            Assert.Equal(1, result.Item2);
         }
         /// <summary>
         /// Can lose diagonal
@@ -444,7 +444,7 @@ namespace TicTacToeTests
             // act
             Tuple<bool, int> result = engine.Utility(board, 1, 'X');
             // assert
-            Assert.Equal(-1, result.Item2);
+            Assert.Equal(1, result.Item2);
         }
         /// <summary>
         /// Can lose anti-diagonal
@@ -460,7 +460,7 @@ namespace TicTacToeTests
             // act
             Tuple<bool, int> result = engine.Utility(board, 7, 'X');
             // assert
-            Assert.Equal(-1, result.Item2);
+            Assert.Equal(1, result.Item2);
         }
         /// <summary>
         /// Can tie game
@@ -495,7 +495,7 @@ namespace TicTacToeTests
             // act
             int result = engine.MiniMax(board, 1, '0');
             // assert
-            Assert.Equal(1, result);
+            Assert.Equal(-1, result);
         }
         /// <summary>
         /// Determines whether this instance [can test mini maximum early game as x].
@@ -508,7 +508,7 @@ namespace TicTacToeTests
             // act
             int result = engine.MiniMax(board, 0, 'X');
             // assert
-            Assert.Equal(1, result);
+            Assert.Equal(0, result);
         }
         /// <summary>
         /// Determines whether this instance [can test mini maximum mid game as0].
@@ -526,7 +526,7 @@ namespace TicTacToeTests
             // act
             int result = engine.MiniMax(board, 3, '0');
             // assert
-            Assert.Equal(1, result);
+            Assert.Equal(-1, result);
         }
         /// <summary>
         /// Determines whether this instance [can test mini maximum mid game as x].
@@ -574,16 +574,16 @@ namespace TicTacToeTests
             // arrange
             BoardTests BST = new BoardTests();
             board.Cells[0].Symbol = 'X';
-            board.Cells[6].Symbol = 'X';
+            board.Cells[1].Symbol = '0';
+            board.Cells[2].Symbol = 'X';
             board.Cells[3].Symbol = '0';
             board.Cells[4].Symbol = '0';
-            board.Cells[2].Symbol = 'X';
-            board.Cells[1].Symbol = '0';
+            board.Cells[6].Symbol = 'X';
             board.Cells[7].Symbol = '0';
             // act
             int result = engine.MiniMax(board, 5, 'X');
             // assert
-            Assert.Equal(-1, result);
+            Assert.Equal(1, result);
         }            
     }
 }
