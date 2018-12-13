@@ -1,5 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using TTTGame.Shared;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using TTTGame.Server.Models;
 
 namespace TTTGame.Server.DataAccess
 {
@@ -13,9 +17,6 @@ namespace TTTGame.Server.DataAccess
         {
         }
 
-        /// <summary>
-        /// Gets or sets statiscs of GameStats Model; Query and save instances
-        /// </summary>
-        public DbSet<GameStats> Stats { get; set; }
+        public DbSet<GameStats> GameStats { set; get; }
     }
 }
