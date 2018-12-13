@@ -111,8 +111,18 @@ namespace TicTacToe.Core
         /// <param name="symbol">Symbol to assign to user player</param>
         public void SetSymbol(char symbol)
         {
+            Console.WriteLine($"user's choice: {symbol}");
+            Console.WriteLine($"Symbols before change. minPlayer: {_minPlayer}, maxPlayer: {_maxPlayer}");
             _minPlayer = symbol;
             _maxPlayer = symbol == '0' ? 'X' : '0';
+            Console.WriteLine($"Symbols after change. minPlayer: {_minPlayer}, maxPlayer: {_maxPlayer}");
+            _board.Initialize();
+            Updated?.Invoke(this, new EventArgs());
+            if (_maxPlayer == 'X')
+            {
+                Console.WriteLine("AI's turn");
+                ComputerMove();
+            }
         }
 
         /// <summary>
