@@ -233,8 +233,34 @@ background-color: rgba(255, 255, 255, 0.1);
         text-align: center;
         top: 0rem;
         width: 100%;
+        -webkit-animation: fadeOut 2s forwards;
+        animation: fadeOut 2s forwards;
+        -webkit-animation-delay: 5s;
+        animation-delay: 5s;
     }
 
+    @-webkit-keyframes fadeOut {
+        from {
+            opacity: 1;
+        }
+
+        to {
+            opacity: 0;
+            z-index: -1;
+        }
+    }
+
+    @keyframes fadeOut {
+        from {
+            opacity: 1;
+        }
+
+        to {
+            opacity: 0;
+            z-index: -1;
+        }
+    }
+    
     .--hidden {
         left: -9999px;
     }

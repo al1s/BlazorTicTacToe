@@ -165,19 +165,14 @@ namespace TicTacToe.Core
         /// Handle different conditions for game over state
         /// </summary>
         /// <param name="condition">Win, lose, tie</param>
-        public async void HandleTerminalConditions(int condition)
+        public void HandleTerminalConditions(int condition)
         {
             if (condition == -1) _view.ShowMsg("You win!");
             else if (condition == 1) _view.ShowMsg("Computer wins!");
             else if (condition == 0) _view.ShowMsg("Draw!");
             Updated?.Invoke(this, new EventArgs());
-            Console.WriteLine("The message presenter invoked");
-            Task delay = Task.Run(() =>
-            {
-                Task.Delay(3000);
-                _view.HideMsg();
-                _board.Initialize();
-            });
+            _view.HideMsg();            
+            _board.Initialize();
         }
 
         /// <summary>
